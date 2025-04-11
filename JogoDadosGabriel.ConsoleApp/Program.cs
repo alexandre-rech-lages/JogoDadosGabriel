@@ -7,26 +7,24 @@ public class Program
     public static void Main(string[] args)
     {
         ExibirCabecalhoDoJogo();
-
-        int pont_jogador = 0;
-        int pont_computador = 0;
+       
         int linha_chegada = 30;
 
-        while (pont_jogador <= linha_chegada && pont_computador <= linha_chegada)
+        while (Jogo.pont_jogador <= linha_chegada && Jogo.pont_computador <= linha_chegada)
         {
-            pont_jogador = Jogo.JogadorRealizarJogada(pont_jogador);
+            Jogo.JogadorRealizarJogada();
 
             Console.WriteLine("------------------------------------------");
 
-            pont_computador = Jogo.ComputadorRelizarJogada(pont_computador);
+            Jogo.ComputadorRelizarJogada();
 
             Console.ReadLine();
             Console.Clear();
 
-            if (pont_jogador >= linha_chegada && pont_computador < pont_jogador)
+            if (Jogo.pont_jogador >= linha_chegada && Jogo.pont_computador < Jogo.pont_jogador)
                 Console.WriteLine("Jogador ganhou");
 
-            if (pont_computador >= linha_chegada && pont_computador > pont_jogador)
+            if (Jogo.pont_computador >= linha_chegada && Jogo.pont_computador > Jogo.pont_jogador)
                 Console.WriteLine("Computador ganhou");
         }
 

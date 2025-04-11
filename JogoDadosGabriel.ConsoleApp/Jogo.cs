@@ -8,7 +8,10 @@ namespace JogoDadosGabriel.ConsoleApp;
 
 public class Jogo
 {
-    public static int ComputadorRelizarJogada(int pont_computador)
+    public static int pont_jogador = 0;
+    public static int pont_computador = 0;
+
+    public static void ComputadorRelizarJogada()
     {
         bool rodadaExtraComputador;
 
@@ -22,16 +25,14 @@ public class Jogo
 
             pont_computador += dado;
 
-            VerificarEventosEspeciais(ref pont_computador, "Computador");
+            VerificarEventosEspeciais("Computador");
 
             rodadaExtraComputador = TemRodadaExtra(dado);
 
-        } while (rodadaExtraComputador);
-
-        return pont_computador;
+        } while (rodadaExtraComputador);        
     }
 
-    public static int JogadorRealizarJogada(int pont_jogador)
+    public static void JogadorRealizarJogada()
     {
         bool rodadaExtraJogador;
 
@@ -45,39 +46,36 @@ public class Jogo
 
             pont_jogador += dado;
 
-            VerificarEventosEspeciais(ref pont_jogador, "Jogador");
+            VerificarEventosEspeciais("Jogador");
 
             rodadaExtraJogador = TemRodadaExtra(dado);
 
-        } while (rodadaExtraJogador);
-        return pont_jogador;
+        } while (rodadaExtraJogador);        
     }
 
-    public static int VerificarEventosEspeciais(ref int pontuacao, string tipoJogador)
+    public static void VerificarEventosEspeciais(string tipoJogador)
     {
-        if (pontuacao == 5 || pontuacao == 10 || pontuacao == 15 || pontuacao == 25)
+        if (pont_jogador == 5 || pont_jogador == 10 || pont_jogador == 15 || pont_jogador == 25)
         {
             Console.WriteLine("Evento Especial: Avanço Extra de 3 casas!");
             Console.WriteLine("---------------------------------------------");
 
-            pontuacao += 3;
+            pont_jogador += 3;
 
-            Console.WriteLine($"Nova posição: {pontuacao}!");
+            Console.WriteLine($"Nova posição: {pont_jogador}!");
         }
 
-        else if (pontuacao == 7 || pontuacao == 13 || pontuacao == 20)
+        else if (pont_jogador == 7 || pont_jogador == 13 || pont_jogador == 20)
         {
             Console.WriteLine("Evento Especial: Recuo de 2 casas!");
             Console.WriteLine("---------------------------------------------");
 
-            pontuacao -= 2;
+            pont_jogador -= 2;
 
-            Console.WriteLine($"Nova posição: {pontuacao}!");
+            Console.WriteLine($"Nova posição: {pont_jogador}!");
         }
 
-        Console.WriteLine($"A posição do {tipoJogador} é: {pontuacao}");
-
-        return pontuacao;
+        Console.WriteLine($"A posição do {tipoJogador} é: {pont_jogador}");        
     }
 
     public static bool TemRodadaExtra(int dado)
