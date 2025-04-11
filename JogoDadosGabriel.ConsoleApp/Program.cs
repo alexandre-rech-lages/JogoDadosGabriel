@@ -4,14 +4,15 @@ namespace JogoDadosGabriel.ConsoleApp;
 
 public class Program
 {
+    static Jogo jogo;
     public static void Main(string[] args)
     {
-        ExibirCabecalhoDoJogo();              
+        ExibirCabecalhoDoJogo();
 
-        Jogo jogo = new Jogo();
+        jogo = new Jogo();
 
-        while (jogo.NaoTerminou())        
-            jogo.RodarProximaRodada();                              
+        while (jogo.NaoTerminou())
+            jogo.RodarProximaRodada();
 
         Console.ReadLine();
     }
