@@ -10,21 +10,24 @@ public class Program
        
         int linha_chegada = 30;
 
-        while (Jogo.pont_jogador <= linha_chegada && Jogo.pont_computador <= linha_chegada)
+        Jogador jogador = new Jogador("Jogador");
+        Jogador computador = new Jogador("Computador");
+
+        while (jogador.pontuacao <= linha_chegada && computador.pontuacao <= linha_chegada)
         {
-            Jogo.JogadorRealizarJogada();
+            jogador.RealizarJogada();
 
             Console.WriteLine("------------------------------------------");
 
-            Jogo.ComputadorRelizarJogada();
+            computador.RealizarJogada();
 
             Console.ReadLine();
             Console.Clear();
 
-            if (Jogo.pont_jogador >= linha_chegada && Jogo.pont_computador < Jogo.pont_jogador)
+            if (jogador.pontuacao >= linha_chegada && computador.pontuacao < jogador.pontuacao)
                 Console.WriteLine("Jogador ganhou");
 
-            if (Jogo.pont_computador >= linha_chegada && Jogo.pont_computador > Jogo.pont_jogador)
+            if (computador.pontuacao >= linha_chegada && computador.pontuacao > jogador.pontuacao)
                 Console.WriteLine("Computador ganhou");
         }
 
