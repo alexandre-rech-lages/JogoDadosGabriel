@@ -13,9 +13,8 @@ public class Program
         int pont_jogador = 0;
         int pont_robo = 0;
         int linha_chegada = 30;
-        string controle = "a";
 
-        while (controle != "x" && controle != "X" && pont_jogador <= linha_chegada && pont_robo <= linha_chegada)
+        while (pont_jogador <= linha_chegada && pont_robo <= linha_chegada)
         {
             bool rodadaExtraUsuario;
 
