@@ -5,16 +5,10 @@ namespace JogoDadosGabriel.ConsoleApp;
 public class Program
 {
     public static void Main(string[] args)
-    {       
+    {
         Console.WriteLine("Bem vindo ao jogo de corrida de dados");
 
-        Console.WriteLine("Trilha da Corrida");
-
-        int[] trilha = new int[31];
-
-        ConfigurarTrilha(trilha);
-
-        MostrarTrilha(trilha);
+        Console.WriteLine("Trilha da Corrida");       
 
         int pont_jogador = 0;
         int pont_robo = 0;
@@ -23,39 +17,112 @@ public class Program
 
         while (controle != "x" && controle != "X" && pont_jogador <= linha_chegada && pont_robo <= linha_chegada)
         {
-            Console.WriteLine("Jogador");
-            Console.WriteLine("Pressione enter para rolar o dado");
+            bool rodadaExtraUsuario;
 
-            string rolar_dado = Console.ReadLine();
+            do
+            {
+                rodadaExtraUsuario = false;
 
-            Random random = new Random();
+                Console.WriteLine("Jogador");
+                Console.WriteLine("Pressione enter para rolar o dado");
 
-            int dado = random.Next(1, 6);
+                string rolar_dado = Console.ReadLine();
 
-            Console.WriteLine("Jogador tirou: " + dado);
+                Random random = new Random();
 
-            pont_jogador = pont_jogador + dado;
+                int dado = random.Next(1, 6);
 
-            Console.WriteLine($"A posição do jogador é: {pont_jogador}");
+                Console.WriteLine("Jogador tirou: " + dado);
+
+                pont_jogador = pont_jogador + dado;
+
+                if (pont_jogador == 5 || pont_jogador == 10 || pont_jogador == 15 || pont_jogador == 25)
+                {
+                    Console.WriteLine("Evento Especial: Avanço Extra de 3 casas!");
+                    Console.WriteLine("---------------------------------------------");
+
+                    pont_jogador += 3;
+
+                    Console.WriteLine($"Nova posição: {pont_jogador}!");
+                }
+
+                else if (pont_jogador == 7 || pont_jogador == 13 || pont_jogador == 20)
+                {
+                    Console.WriteLine("Evento Especial: Recuo de 2 casas!");
+                    Console.WriteLine("---------------------------------------------");
+
+                    pont_jogador -= 2;
+
+                    Console.WriteLine($"Nova posição: {pont_jogador}!");
+                }
+
+                if (dado == 6)
+                {
+                    Console.WriteLine("Evento Especial: RODADA EXTRA!");
+                    Console.WriteLine("---------------------------------------------");
+
+                    rodadaExtraUsuario = true;
+                }
+
+                Console.WriteLine($"A posição do jogador é: {pont_jogador}");
+
+            } while (rodadaExtraUsuario);
 
             Console.WriteLine("------------------------------------------");
 
-            Console.WriteLine("Computador");
-            Console.WriteLine("Pressione enter para rolar o dado");
-            rolar_dado = Console.ReadLine();
+            bool rodadaExtraRobo;
 
-            dado = random.Next(1, 6);
+            do
+            {
+                rodadaExtraRobo = false;
 
-            Console.WriteLine("Computador tirou: " + dado);
+                Console.WriteLine("Computador");
+                Console.WriteLine("Pressione enter para rolar o dado");
+                string rolar_dado = Console.ReadLine();
 
-            pont_robo = pont_robo + dado;            
+                Random random = new Random();
+                int dado = random.Next(1, 6);
 
-            Console.WriteLine($"A posição do Robo é: {pont_robo}");
+                Console.WriteLine("Computador tirou: " + dado);
+
+                pont_robo = pont_robo + dado;
+
+                if (pont_robo == 5 || pont_robo == 10 || pont_robo == 15 || pont_robo == 25)
+                {
+                    Console.WriteLine("Evento Especial: Avanço Extra de 3 casas!");
+                    Console.WriteLine("---------------------------------------------");
+
+                    pont_robo += 3;
+
+                    Console.WriteLine($"Nova posição: {pont_robo}!");
+                }
+
+                else if (pont_robo == 7 || pont_robo == 13 || pont_robo == 20)
+                {
+                    Console.WriteLine("Evento Especial: Recuo de 2 casas!");
+                    Console.WriteLine("---------------------------------------------");
+
+                    pont_robo -= 2;
+
+                    Console.WriteLine($"Nova posição: {pont_robo}!");
+                }
+
+                if (dado == 6)
+                {
+                    Console.WriteLine("Evento Especial: RODADA EXTRA!");
+                    Console.WriteLine("---------------------------------------------");
+
+                    rodadaExtraUsuario = true;
+                }
+
+                Console.WriteLine($"A posição do Robo é: {pont_robo}");
+
+            } while (rodadaExtraRobo);
 
             Console.ReadLine();
             Console.Clear();
 
-            if (pont_jogador >= linha_chegada && pont_robo < pont_jogador) 
+            if (pont_jogador >= linha_chegada && pont_robo < pont_jogador)
             {
                 Console.WriteLine("Jogador ganhou");
             }
@@ -63,28 +130,9 @@ public class Program
             if (pont_robo >= linha_chegada && pont_robo > pont_jogador)
             {
                 Console.WriteLine("Computador ganhou");
-            }            
+            }
         }
 
         Console.ReadLine();
-    }
-
-    public static void ConfigurarTrilha(int[] novaTrilha)
-    {
-        for (int i = 0; i < novaTrilha.Length; i++)
-        {
-            novaTrilha[i] = i;
-        }
-    }
-
-    static void MostrarTrilha(int[] trilha)
-    {
-        for (int i = 0; i < trilha.Length; i++)
-        {
-            Console.Write(trilha[i]);
-
-            if (i < 30)
-                Console.Write(", ");
-        }
     }
 }
