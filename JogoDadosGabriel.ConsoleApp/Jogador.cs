@@ -9,7 +9,7 @@ namespace JogoDadosGabriel.ConsoleApp;
 public class Jogador
 {
     public int pontuacao = 0;
-    public string tipoJogador;
+    public string tipoJogador = "";
 
     //método constructor
     public Jogador(string tipoJogador)

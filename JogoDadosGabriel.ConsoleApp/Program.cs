@@ -6,30 +6,12 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        ExibirCabecalhoDoJogo();
-       
-        int linha_chegada = 30;
+        ExibirCabecalhoDoJogo();              
 
-        Jogador jogador = new Jogador("Jogador");
-        Jogador computador = new Jogador("Computador");
+        Jogo jogo = new Jogo();
 
-        while (jogador.pontuacao <= linha_chegada && computador.pontuacao <= linha_chegada)
-        {
-            jogador.RealizarJogada();
-
-            Console.WriteLine("------------------------------------------");
-
-            computador.RealizarJogada();
-
-            Console.ReadLine();
-            Console.Clear();
-
-            if (jogador.pontuacao >= linha_chegada && computador.pontuacao < jogador.pontuacao)
-                Console.WriteLine("Jogador ganhou");
-
-            if (computador.pontuacao >= linha_chegada && computador.pontuacao > jogador.pontuacao)
-                Console.WriteLine("Computador ganhou");
-        }
+        while (jogo.NaoTerminou())        
+            jogo.RodarProximaRodada();                              
 
         Console.ReadLine();
     }
